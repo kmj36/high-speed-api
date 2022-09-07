@@ -14,7 +14,12 @@ struct MiddleWare
     {}
 
     void after_handle(crow::request& req, crow::response& res, context& ctx)
-    {}
+    {
+		res.add_header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+		res.add_header("X-XSS-Protection", "1");
+		res.add_header("X-Frame-Options", "deny");
+		res.add_header("X-Content-Type-Options", "nosniff");
+	}
 };
 
 App<MiddleWare> app;
@@ -23,8 +28,6 @@ void Routes();
 int main()
 {
 	Routes();
-
-	CROW_CATCHALL_ROUTE(app);
 
 	//app.port(80).multithreaded().run(); // 테스트
 	app.port(443).ssl_file("/etc/letsencrypt/live/kmj36.duckdns.org/cert.pem", "/etc/letsencrypt/live/kmj36.duckdns.org/privkey.pem").multithreaded().run();
@@ -36,6 +39,7 @@ void Routes()
 	([]()
 	{
 		response res(mustache::load_text("index.html"));
+		res.add_header("Content-Type", "text/html");
 		return res;
 	});
 
@@ -43,6 +47,7 @@ void Routes()
 	([](unsigned int pagenum)
 	{
 		response res(::std::to_string(pagenum));
+		res.add_header("Content-Type", "text/html");
 		return res;
 	});
 
@@ -50,6 +55,7 @@ void Routes()
 	([](::std::string strSearch)
 	{
 		response res(mustache::load_text("search.html"));
+		res.add_header("Content-Type", "text/html");
 		return res;
 	});
 }
