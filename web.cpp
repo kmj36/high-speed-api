@@ -1,6 +1,10 @@
+#define CROW_ENABLE_COMPRESSION
+#define CROW_ENABLE_SSL
+
 #include <iostream>
 #include <crow.h>
 #include <crow/middlewares/cors.h>
+#include <crow/compression.h>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 
@@ -41,6 +45,8 @@ int main()
 
 	app.port(443)
 	.bindaddr("192.168.232.2")
+	.use_compression(crow::compression::algorithm::DEFLATE)
+	//.use_compression(crow::compression::algorithm::GZIP)
 	.ssl_file("/etc/letsencrypt/live/kmj36.duckdns.org/cert.pem", "/etc/letsencrypt/live/kmj36.duckdns.org/privkey.pem")
 	.loglevel(crow::LogLevel::Debug)
 	.multithreaded()
