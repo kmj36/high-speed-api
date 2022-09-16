@@ -1,5 +1,6 @@
 #include <iostream>
 #include <crow.h>
+#include <crow/middlewares/cors.h>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 
@@ -19,18 +20,31 @@ struct MiddleWare
 		res.add_header("X-XSS-Protection", "1");
 		res.add_header("X-Frame-Options", "deny");
 		res.add_header("X-Content-Type-Options", "nosniff");
+		res.add_header("Content-Security-Policy", "default-src 'self'");
 	}
 };
 
-App<MiddleWare> app;
+App<MiddleWare, crow::CORSHandler> app;
 void Routes();
 
 int main()
 {
 	Routes();
 
-	//app.port(80).multithreaded().run(); // 테스트
-	app.port(443).ssl_file("/etc/letsencrypt/live/kmj36.duckdns.org/cert.pem", "/etc/letsencrypt/live/kmj36.duckdns.org/privkey.pem").multithreaded().run();
+	auto& cors = app.get_middleware<crow::CORSHandler>();
+	
+	cors.global()
+	.headers("Content-Type")
+	.methods(HTTPMethod::GET, HTTPMethod::POST, HTTPMethod::OPTIONS, HTTPMethod::PUT, HTTPMethod::DELETE, HTTPMethod::PATCH)
+	.origin("https://kmj36.duckdns.org")
+	.allow_credentials();
+
+	app.port(443)
+	.bindaddr("192.168.232.2")
+	.ssl_file("/etc/letsencrypt/live/kmj36.duckdns.org/cert.pem", "/etc/letsencrypt/live/kmj36.duckdns.org/privkey.pem")
+	.loglevel(crow::LogLevel::Debug)
+	.multithreaded()
+	.run_async();
 }
 
 void Routes()

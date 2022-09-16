@@ -9,13 +9,81 @@ body {
     height: 100%;
 }
 
-.head {
-    background-color: brown;
-}
-
-.foot {
-    background-color: rgb(100, 100, 255);
-}
-
+/* 데스크탑 */
 .container {
+    display: grid;
+    grid-template-areas: "header header" "sidebar content";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 70px;
+    background-color: aqua;
+    height: 100%;
+}
+
+.head {
+    grid-area: header;
+    background-color: gray;
+}
+
+.menu {
+    grid-area: sidebar;
+    background-color: red;
+}
+
+.content {
+    grid-area: content;
+    background-color: white;
+}
+
+@media screen and (max-width:1023px) {
+/* 타블렛 */
+.container {
+    display: grid;
+    grid-template-areas: "header header" "sidebar content";
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 70px;
+    background-color: aqua;
+    height: 100%;
+}
+
+.head {
+    grid-area: header;
+    background-color: gray;
+}
+
+.menu {
+    grid-area: sidebar;
+    background-color: blue;
+}
+
+.content {
+    grid-area: content;
+    background-color: white;
+}
+}
+
+@media screen and (max-width:767px) {
+/* 모바일 */
+.container {
+    display: grid;
+    grid-template-areas: "header" "sidebar" "content";
+    background-color: aqua;
+    grid-template-columns: 1fr;
+    grid-template-rows: 70px 1fr 3fr;
+    height: 100%;
+}
+
+.head {
+    grid-area: header;
+    background-color: gray;
+}
+
+.menu {
+    grid-area: sidebar;
+    background-color: green;
+}
+
+.content {
+    grid-area: content;
+    background-color: white;
+}
 }
