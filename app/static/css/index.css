@@ -9,6 +9,17 @@ body {
     height: 100%;
 }
 
+#logo {
+    width: 60px;
+    height: 60px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.logo_home {
+    display: inline-block;
+}
+
 /* 데스크탑 */
 .container {
     display: grid;

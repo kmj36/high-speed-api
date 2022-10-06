@@ -58,24 +58,43 @@ void Routes()
 	CROW_ROUTE(app, "/").methods(HTTPMethod::GET)
 	([]()
 	{
-		response res(mustache::load_text("index.html"));
+		response res;
 		res.add_header("Content-Type", "text/html");
+
+		auto page = mustache::load("index.html");
+		crow::mustache::context ctx;
+
+		res = page.render(ctx);
 		return res;
 	});
 
 	CROW_ROUTE(app, "/post/<uint>").methods(HTTPMethod::GET)
 	([](unsigned int pagenum)
 	{
-		response res(::std::to_string(pagenum));
+		response res;
 		res.add_header("Content-Type", "text/html");
+
+		auto page = mustache::load("post.html");
+		crow::mustache::context ctx;
+
+		ctx["pagenumber"] = pagenum;
+
+		res = page.render(ctx);
 		return res;
 	});
 
 	CROW_ROUTE(app, "/search/<string>").methods(HTTPMethod::GET)
 	([](::std::string strSearch)
 	{
-		response res(mustache::load_text("search.html"));
+		response res;
 		res.add_header("Content-Type", "text/html");
+
+		auto page = mustache::load("search.html");
+		crow::mustache::context ctx;
+
+		ctx["searchtext"] = strSearch;
+
+		res = page.render(ctx);
 		return res;
 	});
 }
