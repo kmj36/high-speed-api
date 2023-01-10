@@ -35,7 +35,7 @@
 *.env
 
 #exclude
-ideas/
-Web/nginx/
+./ideas
 *.sh
-API/static/
+API/static
+.vscode
