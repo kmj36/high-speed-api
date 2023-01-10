@@ -1,1 +1,0 @@
-g++ -o Api.out api.cpp -lpthread -lssl -lcrypto -lz && sudo ./Api.out 1
