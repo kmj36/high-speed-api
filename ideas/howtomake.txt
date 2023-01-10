@@ -1,2 +1,0 @@
-443 g++ -o Api.out api.cpp -lpthread -lssl -lcrypto -lz && sudo ./Api.out 1
-80 g++ -o Api.out api.cpp -lpthread -lssl -lcrypto -lz && sudo ./Api.out 1
