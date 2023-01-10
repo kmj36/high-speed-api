@@ -1,0 +1,21 @@
+The New Blog Project Encrypt
+
+(E)
+[base64 utf-8, LF] 1
+https://www.base64decode.org/
+v
+[aes256] 3
+https://encode-decode.com/aes256-encrypt-online/
+^
+[SHA256] 2
+https://sha256.online/
+
+(D)
+[base64 utf-8, LF] 3
+https://www.base64decode.org/
+^
+[aes256] 2
+https://encode-decode.com/aes256-encrypt-online/
+^
+[SHA256] 1
+https://sha256.online/

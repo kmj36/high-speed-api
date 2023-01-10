@@ -1,0 +1,1 @@
+sudo rm -r /var/www/html/* && sudo cp -r ~/PROJECT/Micro-blog/Web/Src/* /var/www/html/ && sudo systemctl start nginx
