@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	.allow_credentials();
 
 	app.port(44732)
-	.use_compression(crow::compression::algorithm::DEFLATE)
+	.use_compression(crow::compression::algorithm::GZIP)
 	.ssl_file("/etc/letsencrypt/live/kmj36.duckdns.org/cert.pem", "/etc/letsencrypt/live/kmj36.duckdns.org/privkey.pem")
 	.loglevel((crow::LogLevel)LogLevel)
 	.multithreaded()

@@ -36,6 +36,5 @@
 
 #exclude
 ideas/
-*.sh
 API/static
 .vscode
