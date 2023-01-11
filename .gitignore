@@ -35,7 +35,7 @@
 *.env
 
 #exclude
-./ideas
+ideas/
 *.sh
 API/static
 .vscode
