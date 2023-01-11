@@ -1,1 +1,0 @@
-sudo killall -9 Api.out
